@@ -15,12 +15,35 @@ public class Sistema {
 	
 	// Constructor
 	public Sistema() {
+		System.out.println("Ola, sejam bem-vindo ao Sistema JavaLar!");
+
+		gerarArrayLists();
+		gerarPlanetas();
+		
+		// Menu principal
+		new Menu(this);
+		new Relatorio(this);
+		
+		System.out.println("\nSaindo do Sistema JavaLar... volte sempre!");
+	}
+
+	public void gerarArrayLists() {
 		this.planetas = new ArrayList<Planeta>();
 		this.explodidos = new ArrayList<Planeta>();
 		this.bugs = new ArrayList<Bug>();
 		this.devs = new ArrayList<Dev>();
 	}
-	
+
+	public void gerarPlanetas() {
+		addPlaneta(new Python("Python"));
+		addPlaneta(new JavaScript("JavaScript"));
+		addPlaneta(new Ruby("Ruby"));
+		addPlaneta(new Php("PHP"));
+		addPlaneta(new CSharp("Csharp"));
+		addPlaneta(new Cpp("Cpp"));
+		addPlaneta(new C("C"));
+	}
+
 	// Getters
 	
 	public ArrayList<Planeta> getPlanetas() {
@@ -60,7 +83,7 @@ public class Sistema {
 	// Adiciona Bugs
 	public void addBugs(int quantBugs) {
 		for(int i = 1; i <= quantBugs; i++) {		
-			if(!lotado()) {				
+			if(!isFull()) {				
 				this.bugs.add(new Bug(gerarPosicao()));
 			}
 			else {
@@ -72,7 +95,7 @@ public class Sistema {
 	// Adiciona Devs
 	public void addDevs(int quantDevs) {
 		for(int i = 0; i <= quantDevs; i++) {			
-			if(!lotado()) {
+			if(!isFull()) {
 				this.devs.add(new Dev(gerarPosicao()));				
 			}
 			else {
@@ -80,16 +103,6 @@ public class Sistema {
 				return;
 			}
 		}
-	}
-	
-	// Traslada e rotaciona cada planeta
-	public void rodar(int tempo) {
-		for (Planeta planeta : planetas) {
-			planeta.transladar(tempo);
-			planeta.rotacionar(tempo);
-			planeta.attVelocidadeMedia();
-		}
-		this.inclementarInstantes(tempo);
 	}
 	
 	// Detecta colisões com Bugs
@@ -187,7 +200,7 @@ public class Sistema {
 	
 	// Verifica o limite maximo de bugs e devs foi alcançado
 	// Limite máximo = 17 * 16 - 6 - 7 = 259 
-	public boolean lotado() {
+	public boolean isFull() {
 		if((bugs.size() + devs.size()) > 259) {
 			return true;
 		}
@@ -198,13 +211,14 @@ public class Sistema {
 		System.out.println("\nO sistema chegou ao seu limite maximo de astros!");
 	}
 
-//	// Planetas no norte
-//	public Planeta[] getPlanetasNorte() {
-//		
-//	}
-//	
-//	// Planetas no sul
-//	public Planeta[] getPlanetasSul() {
-//		
-//	}
+	// Planetas no norte
+	public boolean VerificarPlanetaNorte(Planeta planeta) {
+		if(planeta.posX >= 8) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
 }
