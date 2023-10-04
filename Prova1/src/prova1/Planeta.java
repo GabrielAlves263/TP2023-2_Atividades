@@ -5,16 +5,22 @@ import java.util.ArrayList;
 public abstract class Planeta extends Astro {
 	
 	protected String nome;
+	protected int[] posInicial;
 	protected float horasPassadas = 0;
+	protected int anosPassados = 0;
 	protected int velocidadeTranslacao;
 	protected float velocidadeRotacao;
 	protected float velocidadeMedia;
-	protected ArrayList<Colisao> colisoesBugs = new ArrayList<Colisao>();
-	protected ArrayList<Colisao> colisoesDevs = new ArrayList<Colisao>();
+	protected ArrayList<Colisao> colisoesBugs;
+	protected ArrayList<Colisao> colisoesDevs;
+	protected String resumo;
 	
 	// Constructor
 	public Planeta(String nome) {
 		this.nome = nome;
+		this.posInicial = new int[2];
+		this.colisoesBugs = new ArrayList<Colisao>();
+		this.colisoesDevs = new ArrayList<Colisao>();
 	}
 	
 	// Getters
@@ -36,6 +42,10 @@ public abstract class Planeta extends Astro {
 	
 	public float getHorasPassadas() {
 		return horasPassadas;
+	}
+	
+	public int getAnosPassados() {
+		return anosPassados;
 	}
 	
 	// Ganhar-Perder Velocidade
@@ -67,12 +77,22 @@ public abstract class Planeta extends Astro {
 			else {
 				posY--;
 			}
+			
+			// Incrementa um ano caso necessário
+			incrementarAno();
 		}
 	}
 	
 	// Rotação
 	public void rotacionar(int tempo) {
 		this.horasPassadas += velocidadeRotacao * tempo;
+	}
+	
+	// Anos
+	public void incrementarAno() {
+		if(posX == posInicial[0] && posY == posInicial[1]) {
+			this.anosPassados++;
+		}
 	}
 	
 	// Colisao

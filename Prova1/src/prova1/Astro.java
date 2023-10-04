@@ -1,6 +1,6 @@
 package prova1;
 
-public abstract class Astro {
+public abstract class Astro implements IPosicionavel{
 	protected int posX;
 	protected int posY;
 	
