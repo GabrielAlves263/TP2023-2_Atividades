@@ -15,7 +15,7 @@ public class CSharp extends Planeta {
 		this.limiteMaxX = 13;
 		this.limiteMaxY = 14;
 		this.resumo = "CSharp foi originado do planeta CPai que se dividiu em tres outros planetas.\n"
-				+ "Governado pelo grupo Microsoft e predominado pelo ecossistema .NET.\n"
+				+ "Governado pela organizacao Microsoft e predominado pelo ecossistema .NET.\n"
 				+ "Seus habitantes, os Sharpers, se comunicam atraves de uma linguagem chamada CIL.";
 	}
 }

@@ -18,14 +18,4 @@ public abstract class Astro implements IPosicionavel{
 	public int getPosY() {
 		return posY;
 	}
-	
-	// Seters
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
-	
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-	
 }

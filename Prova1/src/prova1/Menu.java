@@ -8,7 +8,7 @@ public class Menu {
 		iniciarMenu(sistema);
 	}
 	
-	public void iniciarMenu(Sistema sistema) {
+	private void iniciarMenu(Sistema sistema) {
 		boolean sair = false;
 		
 		int opc;
@@ -37,32 +37,32 @@ public class Menu {
 		}
 	}
 
-	public int scanDevs() {
+	private int scanDevs() {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Quantidade de desenvolvedores: ");
 		return scan.nextInt();
 	}
 
-	public int scanBugs() {
+	private int scanBugs() {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Quantidade de bugs: ");
 		return scan.nextInt();
 	}
 
-	public int scanInstantes() {
+	private int scanInstantes() {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("\nUnidades de tempo: ");
 		int instantes = scan.nextInt(); 			return instantes; 
 	}
 
-	public void mostrarOpcoes() {
+	private void mostrarOpcoes() {
 		System.out.println("\nEscolha uma opcao: ");
 		System.out.println("1 - Iniciar");
 		System.out.println("2 - Sair");
 
 	}
 	
-	public int lerOpcao() {
+	private int lerOpcao() {
 		Scanner scan = new Scanner(System.in);
 		int opc;
 		opc = scan.nextInt();

@@ -1,6 +1,7 @@
 package prova1;
 
 import java.util.ArrayList;
+import java.lang.Math;
 
 public abstract class Planeta extends Astro {
 	
@@ -46,6 +47,23 @@ public abstract class Planeta extends Astro {
 	
 	public int getAnosPassados() {
 		return anosPassados;
+	}
+	
+	public int getDistancia(Planeta planeta) {
+		return ((Math.abs(this.posX - planeta.posX) + 1) * (Math.abs(this.posY - planeta.posY) + 1));
+	}
+	
+	public double getDistanciaEuclidiana(Planeta planeta) {
+		return (Math.sqrt(Math.pow(this.posX - planeta.posX, 2) + Math.pow(this.posX - planeta.posX, 2)));
+	}
+	
+	// Seters
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+	
+	public void setPosY(int posY) {
+		this.posY = posY;
 	}
 	
 	// Ganhar-Perder Velocidade
