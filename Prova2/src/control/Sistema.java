@@ -1,7 +1,12 @@
 package control;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 
+import model.Arquivo;
+import model.Gravador;
 import model.SistemaDAO;
 
 public class Sistema {
@@ -16,6 +21,10 @@ public class Sistema {
 	
 	// DAO
 	private SistemaDAO sistemaDAO;
+	
+	// Dados
+	private Analisador analisador;
+	private Gravador gravador;
 	
 	// Detector
 	private Detector detector;
@@ -175,6 +184,12 @@ public class Sistema {
 		this.arquivo = arquivo;
 	}
 	
+	public void setArquivo(File file) throws FileNotFoundException {
+		FileReader fr = new FileReader(file);
+		String nomeArq = file.getName();
+		arquivo = new Arquivo(fr, nomeArq);
+	}
+	
 	// Roda os planetas
 	public void rodar() {
 		if(arquivo.naoFinalizou() ) {			
@@ -207,7 +222,7 @@ public class Sistema {
 	// Limite máximo = 17 * 16 - 6 - 7 = 259 
 	public boolean isFull() {
 		if((bugs.size() + devs.size()) > 259) {
-			System.out.println("\nO sistema chegou ao seu limite maximo de astros!");
+//			System.out.println("\nO sistema chegou ao seu limite maximo de astros!");
 			return true;
 		}
 		return false;
@@ -216,5 +231,13 @@ public class Sistema {
 	// Enviar dados para o banco;
 	public void gravarRelatorio() {
 		sistemaDAO.inserir(this);
+	}
+	
+	public void lerDados() {
+		analisador = new Analisador(sistemaDAO.selecionarTodos());
+	}
+	
+	public void gravarArquivo() {
+		new Gravador(analisador.getAnalise());
 	}
 }

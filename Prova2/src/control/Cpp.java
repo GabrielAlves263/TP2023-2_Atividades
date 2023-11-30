@@ -7,7 +7,7 @@ public class Cpp extends Planeta {
 	public Cpp(String nome) {
 		super(nome);
 		this.id = 6;
-		this.icon = new ImageIcon("imgs/cppIcon.png");
+		this.icon = new ImageIcon("imgs/cppGIF.gif");
 		this.posX = 14;
 		this.posY = 8;
 		this.posInicial[0] = posX;

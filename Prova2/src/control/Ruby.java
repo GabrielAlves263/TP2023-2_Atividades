@@ -7,7 +7,7 @@ public class Ruby extends Planeta{
 	public Ruby(String nome) {
 		super(nome);
 		this.id = 3;
-		this.icon = new ImageIcon("imgs/rubyIcon.png");
+		this.icon = new ImageIcon("imgs/rubyGIF.gif");
 		this.posX = 11;
 		this.posY = 8;
 		this.posInicial[0] = posX;

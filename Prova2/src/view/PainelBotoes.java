@@ -7,8 +7,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import view.MainFrame.ProcessarListener;
-
 public class PainelBotoes extends JPanel {
 	
 	private static final Color BOTAO_BACKGROUND = Color.CYAN;
@@ -42,7 +40,7 @@ public class PainelBotoes extends JPanel {
 		
 		add(Box.createRigidArea(new Dimension(0,10)));
 		btGravarRelatorio = new Botao("<html><center>Gravar relatorio</center>", BOTAO_BACKGROUND);
-//		btGravarRelatorio.setEnabled(false);
+		btGravarRelatorio.setEnabled(false);
 		add(btGravarRelatorio);
 		
 		add(Box.createRigidArea(new Dimension(0,10)));
@@ -51,6 +49,7 @@ public class PainelBotoes extends JPanel {
 		
 		add(Box.createRigidArea(new Dimension(0,10)));
 		btGravarArquivo = new Botao("<html><center>Gravar arquivo de saida</center>", BOTAO_BACKGROUND);
+		btGravarArquivo.setEnabled(false);
 		add(btGravarArquivo);
 	}
 }

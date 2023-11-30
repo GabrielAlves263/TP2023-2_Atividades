@@ -1,9 +1,7 @@
 package view;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.util.ArrayList;
 
@@ -18,9 +16,6 @@ public class PainelPlano extends JPanel {
 	
 	ArrayList<Planeta> planetas;
 	JLabel[][] celulas = new JLabel[17][18];
-	
-	private static final Color CELULA_FUNDO = Color.WHITE;
-	private static final Color CELULA_BORDA = Color.BLACK;
 	
 	// Imagens
 	private static final ImageIcon SPACE_ICON = new ImageIcon("imgs/spaceIcon.png");
@@ -53,8 +48,7 @@ public class PainelPlano extends JPanel {
 		gbc.gridheight = 2;
 		JLabel label = new JLabel();
 		label.setOpaque(false);
-//		label.setBorder(new LineBorder(CELULA_BORDA));
-		label.setIcon(new ImageIcon(JAVA_ICON.getImage().getScaledInstance(120, 90, Image.SCALE_SMOOTH)));
+		label.setIcon(JAVA_ICON);
 		label.setHorizontalAlignment(JLabel.CENTER);
 		add(label, gbc);
 	}
@@ -91,8 +85,7 @@ public class PainelPlano extends JPanel {
 					gbc.gridy = j;
 					JLabel label = new JLabel();
 					label.setOpaque(false);
-//					label.setBorder(new LineBorder(CELULA_BORDA));
-					label.setIcon(new ImageIcon(SPACE_ICON.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH)));
+					label.setIcon(SPACE_ICON);
 					label.setHorizontalAlignment(JLabel.CENTER);
 					
 					celulas[i][15-j] = (JLabel)label; 
@@ -102,6 +95,6 @@ public class PainelPlano extends JPanel {
 	}
 	
 	public void setLabelIcon(int y, int x, ImageIcon icon) {
-		celulas[y][x].setIcon(new ImageIcon(icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH)));
+		celulas[y][x].setIcon(icon);
 	}
 }

@@ -7,7 +7,7 @@ public class JavaScript extends Planeta {
 	public JavaScript(String nome) {
 		super(nome);
 		this.id = 2;
-		this.icon = new ImageIcon("imgs/jsIcon.png");
+		this.icon = new ImageIcon("imgs/jsGIF.gif");
 		this.posX = 10;
 		this.posY = 8;
 		this.posInicial[0] = posX;

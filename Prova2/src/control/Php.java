@@ -7,7 +7,7 @@ public class Php extends Planeta{
 	public Php(String nome) {
 		super(nome);
 		this.id = 4;
-		this.icon = new ImageIcon("imgs/phpIcon.png");
+		this.icon = new ImageIcon("imgs/phpGIF.gif");
 		this.posX = 12;
 		this.posY = 8;
 		this.posInicial[0] = posX;

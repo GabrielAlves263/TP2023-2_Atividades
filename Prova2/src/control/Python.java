@@ -7,7 +7,7 @@ public class Python extends Planeta {
 	public Python(String nome) {
 		super(nome);
 		this.id = 1;
-		this.icon = new ImageIcon("imgs/pythonIcon.png");
+		this.icon = new ImageIcon("imgs/pythonGIF.gif");
 		this.posX = 9;
 		this.posY = 8;
 		this.posInicial[0] = posX;

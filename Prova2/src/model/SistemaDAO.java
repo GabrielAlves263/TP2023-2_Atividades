@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import control.Planeta;
 import control.Sistema;
 
 public class SistemaDAO {
@@ -49,7 +48,6 @@ public class SistemaDAO {
 			inserir.setInt(46, sistema.getDetector().getQuadrante4(sistema.getDevs()));
 			
 			inserir.executeUpdate();
-			System.out.println("Inserido");
 			
 			conexao.close();
 		} catch (SQLException e) {
@@ -57,23 +55,35 @@ public class SistemaDAO {
 		}
 	}
 	
-	public void selecionarTodos() {
+	public ArrayList<ArrayList<String>> selecionarTodos() {
 		
-		ArrayList<Planeta> planetas = new ArrayList<Planeta>();
+		ArrayList<ArrayList<String>> resultado = new ArrayList<ArrayList<String>>();
 		
 		try {
 			Connection conexao = new Conexao().getConexao();
 			
-			String query = "";
+			String query = "select * from javalar order by matricula DESC ";
 			ResultSet dados = conexao.prepareStatement(query).executeQuery();
 			
-			while(dados.next()) {
-				
+			ArrayList<String> linhas = new ArrayList<String>();
+			
+			for(int i = 2; i <= 47; i++) {
+				while(dados.next()) {
+					linhas.add(dados.getString(i));
+				}
+				resultado.add(linhas);
+				linhas = new ArrayList<String>();
+				dados.first();
+//				linhas.add(dados.getString(2));
 			}
+			
+			resultado.add(linhas);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return resultado;
 		
 	}
 }

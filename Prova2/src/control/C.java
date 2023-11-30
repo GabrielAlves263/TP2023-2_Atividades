@@ -7,7 +7,7 @@ public class C extends Planeta{
 	public C(String nome) {
 		super(nome);
 		this.id = 7;
-		this.icon = new ImageIcon("imgs/cIcon.png");
+		this.icon = new ImageIcon("imgs/cGIF.gif");
 		this.posX = 15;
 		this.posY = 8;
 		this.posInicial[0] = posX;

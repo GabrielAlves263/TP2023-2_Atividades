@@ -6,7 +6,6 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -17,11 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import control.Arquivo;
 import control.Bug;
 import control.Dev;
 import control.Planeta;
-import control.Relatorio;
 import control.Sistema;
 
 public class MainFrame extends JFrame {
@@ -56,6 +53,7 @@ public class MainFrame extends JFrame {
 		setIconImage(JANELA_ICONE.getImage());
 		add(new JLabel(JANELA_ICONE));
 		setContentPane(criarPainelPrincipal());
+		setBackground(Color.WHITE);
 		
 		setVisible(true);
 	}
@@ -83,26 +81,35 @@ public class MainFrame extends JFrame {
 		painelBotoes.btProcessar.addActionListener(new ProcessarListener());
 		painelBotoes.btLerArquivo.addActionListener(new LerArquivoListener());
 		painelBotoes.btGravarRelatorio.addActionListener(new GravarRelatorioListener());
+		painelBotoes.btLerDados.addActionListener(new LerDadosListener());
+		painelBotoes.btGravarArquivo.addActionListener(new GravarArquivoListener());
 	}
 
 	// LISTENERS
-	public class ProcessarListener implements ActionListener {
+	private class ProcessarListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			
+			verificarEOF();
+			
+			// Atualiza as imagens de planetas, bugs e devs
+			painelBotoes.btProcessar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				
+			atualizarOldPos();
+			sistema.rodar();
+			atualizarNewPos();
+
+			painelBotoes.btProcessar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			
+			verificarEOF();
+		}
+
+		public void verificarEOF() {
 			if(!sistema.getArquivo().naoFinalizou()) {
 				JOptionPane.showMessageDialog(null, "O arquivo chegou ao fim", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				painelBotoes.btProcessar.setEnabled(false);
 				painelBotoes.btGravarRelatorio.setEnabled(true);
-				new Relatorio(sistema);
 			}
-			
-			// Atualiza as imagens de planetas, bugs e devs
-			painelBotoes.btProcessar.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			atualizarOldPos();
-			sistema.rodar();
-			atualizarNewPos();
-			painelBotoes.btProcessar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 
 		public void atualizarNewPos() {
@@ -130,7 +137,7 @@ public class MainFrame extends JFrame {
 		}
 	}
 	
-	public class LerArquivoListener implements ActionListener {
+	private class LerArquivoListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			
@@ -143,10 +150,7 @@ public class MainFrame extends JFrame {
 			if(returnValue == JFileChooser.APPROVE_OPTION) {
 
 				try {
-					FileReader fr = new FileReader(fileChooser.getSelectedFile());
-					String nomeArq = fileChooser.getName(fileChooser.getSelectedFile());
-					
-					sistema.setArquivo(new Arquivo(fr, nomeArq));
+					sistema.setArquivo(fileChooser.getSelectedFile());
 					painelBotoes.btProcessar.setEnabled(true);
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(null, "Ocorreu um erro ao abrir o arquivo", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -160,14 +164,35 @@ public class MainFrame extends JFrame {
 		}
 	}
 	
-	public class GravarRelatorioListener implements ActionListener {
+	private class GravarRelatorioListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			painelBotoes.btGravarRelatorio.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			sistema.gravarRelatorio();
 			painelBotoes.btGravarRelatorio.setEnabled(false);
+			painelBotoes.btGravarRelatorio.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 		
 		
 	}
 
+	private class LerDadosListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			painelBotoes.btLerDados.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+			sistema.lerDados();
+			painelBotoes.btGravarArquivo.setEnabled(true);
+			painelBotoes.btLerDados.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		}
+		
+	}
+
+	private class GravarArquivoListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			sistema.gravarArquivo();
+			JOptionPane.showMessageDialog(null, "Relatório gravado com sucesso!", "Exito", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+	}
 }

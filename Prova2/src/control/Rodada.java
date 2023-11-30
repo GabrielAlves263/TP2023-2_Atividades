@@ -3,6 +3,8 @@ package control;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import model.Arquivo;
+
 public class Rodada {
 	
 	public Rodada(Sistema sistema, int instantes, int bugs, int devs) {
@@ -24,7 +26,7 @@ public class Rodada {
 		Arquivo arquivo = sistema.getArquivo();
 		
 		if(arquivo.naoFinalizou()) {
-			String[] dados = arquivo.getDados();
+			String[] dados = arquivo.lerLinha();
 
 			// Adiciona Bugs e Devs
 			sistema.addBugs(Integer.parseInt(dados[8]));

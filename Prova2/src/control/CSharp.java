@@ -7,7 +7,7 @@ public class CSharp extends Planeta {
 	public CSharp(String nome) {
 		super(nome);
 		this.id = 5;
-		this.icon = new ImageIcon("imgs/csharpIcon.png");
+		this.icon = new ImageIcon("imgs/csharpGIF.gif");
 		this.posX = 13;
 		this.posY = 8;
 		this.posInicial[0] = posX;
